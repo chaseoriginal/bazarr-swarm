@@ -1,25 +1,24 @@
----
 services:
   bazarr:
     image: ${image}
     container_name: ${container_name}
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
+    - PUID=1000
+    - PGID=33
+    - TZ=America/Chicago
     volumes:
-      - /media/Multimedia/Movies:/movies
-      - /media/Multimedia/TV Series:/tv
-      - /var/lib/docker/volumes/${container_name}:/config
-
+    - /media/Multimedia/Movies:/movies
+    - /media/Multimedia/TV Series:/tv
+    - /var/lib/docker/volumes/bazarr-swarm:/config
     ports:
-      - target: 6767
-        published: 6767
-        protocol: tcp
-        mode: host        
+    - target: 6767
+      published: 6767
+      protocol: tcp
+      mode: host
     deploy:
       placement:
         constraints:
-          - node.labels.deployment.target.bazarr == true
+        - node.labels.deployment.target.bazarr == true
       restart_policy:
         condition: on-failure
+volumes: {}
