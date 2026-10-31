@@ -1,7 +1,7 @@
 services:
   bazarr:
-    image: ${image}
-    container_name: ${container_name}
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr-swarm_bazarr
     environment:
     - PUID=1000
     - PGID=33
